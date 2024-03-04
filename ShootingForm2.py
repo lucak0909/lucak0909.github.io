@@ -37,6 +37,16 @@ frame = webcam.read()
 elapsed = 0
 dampener = 0
 total_frames = 0
+wrist_x = 0
+wrist_y = 0
+radius = 0
+ballCentre = (0, 0)
+sew = 0
+hka = 0
+esh = 0
+shk = 0
+ball_in_hand = False
+record = False
 detector = PoseDetector(staticMode=False,
                         modelComplexity=1,
                         smoothLandmarks=True,
@@ -45,6 +55,12 @@ detector = PoseDetector(staticMode=False,
                         detectionCon=0.5,
                         trackCon=0.5)
 
+# angles lists
+sew_list = []
+esh_list = []
+shk_list = []
+hka_list = []
+
 # Setting webcam properties
 webcam.set(3, 640)  # width value
 webcam.set(4, 640)  # height value
@@ -52,6 +68,13 @@ webcam.set(10, 100)  # brightness value
 webcam.set(cv.CAP_PROP_FPS, 15)  # max frame-rate
 webcam_width = webcam.get(3)  # variable for width
 webcam_height = webcam.get(4)  # variable for height
+
+angles_header = ["knee", "hip", "shoulder", "elbow"]
+angles = "angles.csv"
+file = open(angles, "w")
+data = csv.writer(file)
+data.writerow(angles_header)
+file.close()
 
 side = input("\n\nAre You Left Or Right Handed?\n (L/R): ")
 while side.lower() not in ["l", "r"]:
@@ -98,11 +121,11 @@ while True:
                 cv.putText(frame, f"{names[0]} {conf}%", (max(0, x1 + 10), max(25, y1 - 10)), 1, 1.3, (0, 0, 0), 1,
                            cv.FONT_ITALIC)
 
-                cob = (int((x1 + x2) / 2), int((y1 + y2) / 2))
+                bodyCentre = (int((x1 + x2) / 2), int((y1 + y2) / 2))
 
                 # to find distance from the center to give servos data
                 res = webcam_width, webcam_height
-                centre_distance = (res[0] / 2) - cob[0], (res[1] / 2) - cob[1]
+                centre_distance = (res[0] / 2) - bodyCentre[0], (res[1] / 2) - bodyCentre[1]
                 print(f"Distance from Centre = {centre_distance}")
 
                 # centre crosshair
@@ -156,90 +179,132 @@ while True:
 
         if side == "l":
             if keypoints:
-                sew_angle, frame = detector.findAngle(keypoints[11][0:2],
-                                                      keypoints[13][0:2],
-                                                      keypoints[15][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                esh_angle, frame = detector.findAngle(keypoints[13][0:2],
-                                                      keypoints[11][0:2],
-                                                      keypoints[23][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                shk_angle, frame = detector.findAngle(keypoints[11][0:2],
-                                                      keypoints[23][0:2],
-                                                      keypoints[25][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                hka_angle, frame = detector.findAngle(keypoints[27][0:2],
-                                                      keypoints[25][0:2],
-                                                      keypoints[23][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
+                sew, frame = detector.findAngle(keypoints[11][0:2],
+                                                keypoints[13][0:2],
+                                                keypoints[15][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                esh, frame = detector.findAngle(keypoints[13][0:2],
+                                                keypoints[11][0:2],
+                                                keypoints[23][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                shk, frame = detector.findAngle(keypoints[11][0:2],
+                                                keypoints[23][0:2],
+                                                keypoints[25][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                hka, frame = detector.findAngle(keypoints[27][0:2],
+                                                keypoints[25][0:2],
+                                                keypoints[23][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                wrist_x = keypoints[15][0]
+                wrist_y = keypoints[15][1]
+                cv.circle(frame, (keypoints[15][0:2]), 3, (255, 0, 0), -1)
 
         elif side == "r":
             if keypoints:
-                sew_angle, frame = detector.findAngle(keypoints[12][0:2],
-                                                      keypoints[14][0:2],
-                                                      keypoints[16][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                esh_angle, frame = detector.findAngle(keypoints[14][0:2],
-                                                      keypoints[12][0:2],
-                                                      keypoints[24][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                shk_angle, frame = detector.findAngle(keypoints[12][0:2],
-                                                      keypoints[24][0:2],
-                                                      keypoints[26][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
-                hka_angle, frame = detector.findAngle(keypoints[28][0:2],
-                                                      keypoints[26][0:2],
-                                                      keypoints[24][0:2],
-                                                      img=frame,
-                                                      color=(255, 255, 0),
-                                                      scale=10)
+                sew, frame = detector.findAngle(keypoints[12][0:2],
+                                                keypoints[14][0:2],
+                                                keypoints[16][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                esh, frame = detector.findAngle(keypoints[14][0:2],
+                                                keypoints[12][0:2],
+                                                keypoints[24][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                shk, frame = detector.findAngle(keypoints[12][0:2],
+                                                keypoints[24][0:2],
+                                                keypoints[26][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
+                hka, frame = detector.findAngle(keypoints[28][0:2],
+                                                keypoints[26][0:2],
+                                                keypoints[24][0:2],
+                                                img=frame,
+                                                color=(255, 255, 0),
+                                                scale=10)
 
-        # checks yolo model for bounding box
-        for i in outputs2:
+                wrist_x = keypoints[16][0]
+                wrist_y = keypoints[16][1]
+                cv.circle(frame, (keypoints[16][0:2]), 3, (255, 0, 0), -1)
 
-            # Initializes a variable for the boxes
-            boxes = i.boxes
+    # checks yolo model for bounding box
+    for i in outputs2:
 
-            # Iterates through the bounding boxs in frame
-            for box in boxes:
+        # Initializes a variable for the boxes
+        boxes = i.boxes
 
-                # defining bounding boxes
-                x1, y1, x2, y2 = box.xyxy[0]
-                x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+        # Iterates through the bounding boxs in frame
+        for box in boxes:
 
-                # AI confidence value
-                conf_tensor = box.conf[0]
-                conf = math.floor((conf_tensor * 10000 / 100))
+            # defining bounding boxes
+            x1, y1, x2, y2 = box.xyxy[0]
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
 
-                # to only display bounding box with the high confidence
-                if conf > 70:
-                    cob = (int((x1 + x2) / 2), int((y1 + y2) / 2))
+            # AI confidence value
+            conf_tensor = box.conf[0]
+            conf = math.floor((conf_tensor * 10000 / 100))
 
-                    # centre crosshair
-                    cv.line(img=frame, pt1=(int(((x1 + x2) / 2) - 5), int((y1 + y2) / 2)),
-                            pt2=(int(((x1 + x2) / 2) + 5), int((y1 + y2) / 2)), color=(0, 255, 0), thickness=1)
-                    cv.line(img=frame, pt1=(int((x1 + x2) / 2), int((y1 + y2) / 2) - 5),
-                            pt2=(int((x1 + x2) / 2), int((y1 + y2) / 2) + 5), color=(0, 255, 0), thickness=1)
+            # to only display bounding box with the high confidence
+            if conf > 70:
+                ballCentre = (int((x1 + x2) / 2), int((y1 + y2) / 2))
 
-                    # head circle
-                    radius = int((y2 - y1) / 2)
-                    cv.circle(frame, cob, radius, (255, 55, 255), 4)
-                    cv.circle(frame, cob, radius + 3, (0, 0, 0), 1)
-                    cv.circle(frame, cob, radius - 3, (0, 0, 0), 1)
+                # centre crosshair
+                cv.line(img=frame, pt1=(int(((x1 + x2) / 2) - 5), int((y1 + y2) / 2)),
+                        pt2=(int(((x1 + x2) / 2) + 5), int((y1 + y2) / 2)), color=(0, 255, 0), thickness=1)
+                cv.line(img=frame, pt1=(int((x1 + x2) / 2), int((y1 + y2) / 2) - 5),
+                        pt2=(int((x1 + x2) / 2), int((y1 + y2) / 2) + 5), color=(0, 255, 0), thickness=1)
+
+                # head circle
+                radius = int((y2 - y1) / 2)
+                cv.circle(frame, ballCentre, radius, (255, 55, 255), 4)
+                cv.circle(frame, ballCentre, radius + 3, (0, 0, 0), 1)
+                cv.circle(frame, ballCentre, radius - 3, (0, 0, 0), 1)
+
+    if int(math.sqrt((wrist_x - ballCentre[0]) ** 2 + (wrist_y - ballCentre[1]) ** 2)) <= (radius * 2):
+        ball_in_hand = True
+        cv.line(frame, (wrist_x, wrist_y), ballCentre, (0, 0, 255), 3)
+    else:
+        ball_in_hand = False
+
+    if record and (not ball_in_hand):
+        file = open(angles, "a")
+        data = csv.writer(file)
+        data.writerow([min(hka_list), min(shk_list), min(esh_list), min(sew_list)])
+        file.close()
+
+    if ball_in_hand and (75 < sew < 105) and (esh < 15) and (shk < 130) and (hka < 130):
+        record = True
+    elif not ball_in_hand:
+        record = False
+
+    if record:
+        sew_list.append(int(sew))
+        esh_list.append(int(esh))
+        shk_list.append(int(shk))
+        hka_list.append(int(hka))
+    else:
+        sew_list.clear()
+        esh_list.clear()
+        shk_list.clear()
+        hka_list.clear()
+
+    print(record,
+          ball_in_hand,
+          sew_list,
+          esh_list,
+          shk_list,
+          hka_list)
 
     # FPS counter
     currentTime = time.time()
