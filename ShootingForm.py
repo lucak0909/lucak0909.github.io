@@ -6,13 +6,52 @@ import time
 from Final.PoseModule import PoseDetector
 import math
 import csv
-from projectFunctions import displayData
+from pynput import keyboard
+import pandas as pd
 
 
 # setting servos to default position
 def servo_start():
     servo_x.write(90)
     servo_y.write(90)
+
+
+def keyDisplay():
+    print("\n"*30)
+    print("\nShot Registered\n---------------\n To cycle through your angles press 1 to see previous,"
+          " \n3 to see next and 2 to return to analysis.\n")
+    position = 0
+    personal = ["knee", "hip", "shoulder", "elbow"]
+    df = pd.read_csv("personal.csv", usecols=personal)
+    optimal_angles = [108.5, 122.3, 123.4, 71.9]
+    while True:
+        with keyboard.Events() as events:
+            event = events.get(1e6)
+            if event.key == keyboard.KeyCode.from_char('3'):
+                position += 1
+            elif event.key == keyboard.KeyCode.from_char('1'):
+                position -= 1
+            elif event.key == keyboard.KeyCode.from_char('2'):
+                time.sleep(3)
+                break
+            if position < 0:
+                position = 0
+            elif position > 3:
+                position = 3
+
+            if position == 0:
+                print(
+                    f"\n\n your {personal[position]} angle is {sum(df.knee) / len(df.knee)} | The optimal angle is {optimal_angles[position]}")
+            elif position == 1:
+                print(
+                    f"\n\n your {personal[position]} angle is {sum(df.hip) / len(df.hip)} | The optimal angle is {optimal_angles[position]}")
+            elif position == 2:
+                print(
+                    f"\n\n your {personal[position]} angle is {sum(df.shoulder) / len(df.shoulder)} | The optimal angle is {optimal_angles[position]}")
+            elif position == 3:
+                print(
+                    f"\n\n your {personal[position]} angle is {sum(df.elbow) / len(df.elbow)} | The optimal angle is {optimal_angles[position]}")
+            time.sleep(0.3)
 
 
 # Setting up Servos
@@ -71,12 +110,6 @@ webcam_width = webcam.get(3)  # variable for width
 webcam_height = webcam.get(4)  # variable for height
 
 angles_header = ["knee", "hip", "shoulder", "elbow"]
-angles = "angles.csv"
-file = open(angles, "w")
-data = csv.writer(file)
-data.writerow(angles_header)
-file.close()
-
 file = open("personal.csv", "w")
 data = csv.writer(file)
 data.writerow(angles_header)
@@ -277,27 +310,14 @@ while True:
                 cv.circle(frame, ballCentre, radius + 3, (0, 0, 0), 1)
                 cv.circle(frame, ballCentre, radius - 3, (0, 0, 0), 1)
 
-    if ball_in_hand and int(math.sqrt((wrist_x - ballCentre[0]) ** 2 + (wrist_y - ballCentre[1]) ** 2)) > (radius * 2):
-        ball_in_hand = False
-        print("\n\tShot Complete"
-              "\n\t------------- \n\n*Press Both Buttons Simultaneously to Restart*\n")
-        displayData()
-    elif int(math.sqrt((wrist_x - ballCentre[0]) ** 2 + (wrist_y - ballCentre[1]) ** 2)) <= (radius * 2):
+    if abs((wrist_x - ballCentre[0]) ** 2 + (wrist_y - ballCentre[1])) <= (radius * 2):
         ball_in_hand = True
         cv.line(frame, (wrist_x, wrist_y), ballCentre, (0, 0, 255), 3)
     else:
         ball_in_hand = False
 
-    if record and (not ball_in_hand):
-        file = open("personal.csv", "a")
-        data = csv.writer(file)
-        data.writerow([min(hka_list), min(shk_list), min(esh_list), min(sew_list)])
-        file.close()
-
-    if ball_in_hand and (75 < sew < 105) and (esh < 15) and (shk < 130) and (hka < 130):
+    if ball_in_hand and (75 < sew < 105) and (shk < 130) and (hka < 130):
         record = True
-    elif not ball_in_hand:
-        record = False
 
     if record:
         sew_list.append(int(sew))
@@ -310,12 +330,13 @@ while True:
         shk_list.clear()
         hka_list.clear()
 
-    print(record,
-          ball_in_hand,
-          sew_list,
-          esh_list,
-          shk_list,
-          hka_list)
+    if record and (not ball_in_hand):
+        record = False
+        file = open("personal.csv", "a")
+        data = csv.writer(file)
+        data.writerow([min(hka_list), min(shk_list), min(esh_list), min(sew_list)])
+        file.close()
+        keyDisplay()
 
     # FPS counter
     currentTime = time.time()
