@@ -9,10 +9,6 @@ import mediapipe as mp
 
 
 class PoseDetector:
-    """
-    Estimates Pose points of a human body using the mediapipe library.
-    """
-
     def __init__(self, staticMode=False,
                  modelComplexity=1,
                  smoothLandmarks=True,
@@ -20,13 +16,6 @@ class PoseDetector:
                  smoothSegmentation=True,
                  detectionCon=0.5,
                  trackCon=0.5):
-        """
-        :param mode: In static mode, detection is done on each image: slower
-        :param upBody: Upper boy only flag
-        :param smooth: Smoothness Flag
-        :param detectionCon: Minimum Detection Confidence Threshold
-        :param trackCon: Minimum Tracking Confidence Threshold
-        """
 
         self.staticMode = staticMode
         self.modelComplexity = modelComplexity
@@ -47,12 +36,6 @@ class PoseDetector:
                                      min_tracking_confidence=self.trackCon)
 
     def findPose(self, img, draw=True):
-        """
-        Find the pose landmarks in an Image of BGR color space.
-        :param img: Image to find the pose in.
-        :param draw: Flag to draw the output on the image.
-        :return: Image with or without drawings
-        """
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.pose.process(imgRGB)
         if self.results.pose_landmarks:
@@ -93,16 +76,6 @@ class PoseDetector:
 
         return self.lmList, self.bboxInfo
     def findAngle(self, p1, p2, p3, img=None, color=(255, 0, 0), scale=5):
-        """
-        Finds angle between three points.
-
-        :param p1: Point1 - (x1,y1)
-        :param p2: Point2 - (x2,y2)
-        :param p3: Point3 - (x3,y3)
-        :param img: Image to draw output on. If no image input output img is None
-        :return:
-        """
-
         # Get the landmarks
         x1, y1 = p1
         x2, y2 = p2

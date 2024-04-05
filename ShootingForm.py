@@ -3,7 +3,7 @@ from ultralytics import YOLO
 import cv2 as cv
 from pyfirmata import Arduino, SERVO
 import time
-from Final.PoseModule import PoseDetector
+from PoseModule import PoseDetector
 import math
 import csv
 from pynput import keyboard
@@ -16,8 +16,8 @@ def servo_start():
     servo_y.write(90)
 
 
-def keyDisplay():
-    print("\n"*30)
+def key_display():
+    print("\n" * 30)
     print("\nShot Registered\n---------------\n To cycle through your angles press 1 to see previous,"
           " \n3 to see next and 2 to return to analysis.\n")
     position = 0
@@ -41,16 +41,20 @@ def keyDisplay():
 
             if position == 0:
                 print(
-                    f"\n\n your {personal[position]} angle is {sum(df.knee) / len(df.knee)} | The optimal angle is {optimal_angles[position]}")
+                    f"\n\n your {personal[position]} angle is {sum(df.knee) / len(df.knee)} | The optimal angle is "
+                    f"{optimal_angles[position]}")
             elif position == 1:
                 print(
-                    f"\n\n your {personal[position]} angle is {sum(df.hip) / len(df.hip)} | The optimal angle is {optimal_angles[position]}")
+                    f"\n\n your {personal[position]} angle is {sum(df.hip) / len(df.hip)} | The optimal angle is "
+                    f"{optimal_angles[position]}")
             elif position == 2:
                 print(
-                    f"\n\n your {personal[position]} angle is {sum(df.shoulder) / len(df.shoulder)} | The optimal angle is {optimal_angles[position]}")
+                    f"\n\n your {personal[position]} angle is {sum(df.shoulder) / len(df.shoulder)} | The optimal angle"
+                    f" is {optimal_angles[position]}")
             elif position == 3:
                 print(
-                    f"\n\n your {personal[position]} angle is {sum(df.elbow) / len(df.elbow)} | The optimal angle is {optimal_angles[position]}")
+                    f"\n\n your {personal[position]} angle is {sum(df.elbow) / len(df.elbow)} | The optimal angle is"
+                    f" {optimal_angles[position]}")
             time.sleep(0.3)
 
 
@@ -65,8 +69,8 @@ servo_y.mode = SERVO
 servo_start()
 
 # Initializing AI models
-ballModel = YOLO("../Final/Weights/ballV8m.pt")
-bodyModel = YOLO("../Final/Weights/v8m_body_highest.pt")
+ballModel = YOLO("../ISE_Project/Weights/ballV8m.pt")
+bodyModel = YOLO("../ISE_Project/Weights/v8m_body_highest.pt")
 
 # Initializing variables:
 names = ["Person"]
@@ -105,7 +109,7 @@ hka_list = []
 webcam.set(3, 640)  # width value
 webcam.set(4, 640)  # height value
 webcam.set(10, 100)  # brightness value
-webcam.set(cv.CAP_PROP_FPS, 15)  # max frame-rate
+webcam.set(cv.CAP_PROP_FPS, 30)  # max frame-rate
 webcam_width = webcam.get(3)  # variable for width
 webcam_height = webcam.get(4)  # variable for height
 
@@ -135,7 +139,7 @@ while True:
         # Initializes a variable for the boxes
         boxes = i.boxes
 
-        # Iterates through the bounding boxs in frame
+        # Iterates through the bounding boxes in frame
         for box in boxes:
 
             # defining bounding boxes
@@ -165,7 +169,6 @@ while True:
                 # to find distance from the center to give servos data
                 res = webcam_width, webcam_height
                 centre_distance = (res[0] / 2) - bodyCentre[0], (res[1] / 2) - bodyCentre[1]
-                print(f"Distance from Centre = {centre_distance}")
 
                 # centre crosshair
                 cv.line(img=frame, pt1=(int(((x1 + x2) / 2) - 5), int((y1 + y2) / 2)),
@@ -173,43 +176,33 @@ while True:
                 cv.line(img=frame, pt1=(int((x1 + x2) / 2), int((y1 + y2) / 2) - 5),
                         pt2=(int((x1 + x2) / 2), int((y1 + y2) / 2) + 5), color=(0, 255, 0), thickness=1)
 
-                # only gives servo instructions every 2 frames
-                if total_frames % 2 == 0:
-                    # servo instructions:
-
-                    # x-axis dampener
-                    temp_x_distance = centre_distance[0]
-                    if temp_x_distance < 0:
-                        temp_x_distance += (temp_x_distance * 2)
-                    dampener = int(math.pow(1.008, temp_x_distance))
-                    print(f"x-dampener = {dampener}")
-                    # left
-                    if centre_distance[0] > 50:
+                # servo instructions:
+                if total_frames % 2 == 0:  # only gives servo instructions every 2 frames
+                    if centre_distance[0] > 50:  # left
                         current_x += 1
-                        current_x = int(current_x + dampener * (current_x - servo_x.read()))
-                    # right
-                    elif centre_distance[0] < -50:
+                        if centre_distance[0] > 150:  # increases angle change based on position on camera
+                            current_x += 2
+                            if centre_distance[0] > 250:
+                                current_x += 3
+                    elif centre_distance[0] < -50:  # right
                         current_x -= 1
-                        current_x = int(current_x + dampener * (current_x - servo_x.read()))
-
-                    temp_y_distance = centre_distance[1]
-                    if temp_y_distance < 0:
-                        temp_y_distance += (temp_y_distance * 2)
-                    dampener = int(math.pow(1.008, temp_y_distance))
-                    print(f"y-dampener = {dampener}")
-                    # down
-                    if centre_distance[1] > 30:
+                        if centre_distance[0] < -150:
+                            current_x -= 2
+                            if centre_distance[0] < -250:
+                                current_x -= 3
+                    if centre_distance[1] > 30:  # down
                         current_y += 1
-                        current_y = int(current_y + dampener * (current_y - servo_y.read()))
-                    # up
-                    elif centre_distance[1] < -30:
+                        if centre_distance[1] > 100:
+                            current_y += 2
+                    elif centre_distance[1] < -30:  # up
                         current_y -= 1
-                        current_y = int(current_y + dampener * (current_y - servo_y.read()))
+                        if centre_distance[1] < -100:
+                            current_y -= 2
 
                     # Ensure servo values are within the valid range
                     current_x = max(0, min(current_x, 180))
                     current_y = max(0, min(current_y, 180))
-
+                    # Writing servo values
                     servo_x.write(current_x)
                     servo_y.write(current_y)
 
@@ -283,7 +276,7 @@ while True:
         # Initializes a variable for the boxes
         boxes = i.boxes
 
-        # Iterates through the bounding boxs in frame
+        # Iterates through the bounding boxes in frame
         for box in boxes:
 
             # defining bounding boxes
@@ -336,17 +329,18 @@ while True:
         data = csv.writer(file)
         data.writerow([min(hka_list), min(shk_list), min(esh_list), min(sew_list)])
         file.close()
-        keyDisplay()
+        key_display()
 
-    # FPS counter
+    # FPS counter to be displayed in the top left corner of the image
     currentTime = time.time()
     fps = 1 / (currentTime - elapsed)
     elapsed = currentTime
     cv.putText(frame, f"FPS: {str(int(fps))}", (10, 20), cv.FONT_ITALIC, .5, (0, 255, 0), 2)
 
-    # when "q" is pressed: loop breaks
+    # When "q" is pressed: loop breaks
     if cv.waitKey(1) == ord("q"):
         break
 
+    # Displays the frame after the post-processing and inference has been completed and the image has been annotated
     cv.imshow("With Bounding Boxes", frame)
     cv.waitKey(1)
