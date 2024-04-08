@@ -27,4 +27,4 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 |08/4| pynput function lag | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
 
 
-# Video of the project in use.
+# Video of the project in use:
