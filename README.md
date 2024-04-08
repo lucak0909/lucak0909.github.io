@@ -3,17 +3,12 @@ Luca Knierim's UL ISE Project Submission\
 Only download: "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py
 
  ## NECESSARY INSTALLATIONS
-
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
   - Nvidia Studio drivers for your specific GPU  ----> https://www.nvidia.com/download/index.aspx
   - CUDA Toolkit 12.4  ----> https://developer.nvidia.com/cuda-downloads?target_os=Windows
-
 These downloads will allow your GPU to process the images instead of your CPU greatly increasing frames per second
 
-
-
 # What the project does:
-
 - Uses an Ultralytics object detection model (YOLOv8) to annotate the output image of a webcam
 - Detected Objects: People, Basketballs
 - The coordinates for the center of the "bounding-box" is compares with the resolution of the image to calculate the user's position in the frame.
@@ -25,3 +20,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
 
 # Bugs and Fixes
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
