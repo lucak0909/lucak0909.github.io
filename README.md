@@ -1,3 +1,12 @@
 # Git Repo for Luca Knierim's UL ISE Project Submission
 
-Only files to download are "READ ME.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py"
+# Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py"
+
+
+To use this programme effectively you must install the following requirements:
+
+  - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
+  - Nvidia Studio drivers for your specific GPU  ----> https://www.nvidia.com/download/index.aspx
+  - CUDA Toolkit 12.4  ----> https://developer.nvidia.com/cuda-downloads?target_os=Windows
+
+These downloads will allow your GPU to process the images instead of your CPU greatly increasing frames per second
