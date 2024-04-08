@@ -14,7 +14,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 
 
-### What the project does:
+# What the project does:
 
 - Uses an Ultralytics object detection model (YOLOv8) to annotate the output image of a webcam
 - Detected Objects: People, Basketballs
@@ -25,3 +25,5 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - The minimum angle in each list is added to their own respective collumn of a CSV.
 - Once the shot is complete (The basketball leaves the users hand while the angles are being recorded), a function displays each angle, and compares them with the optimal angles for a free throw shot.
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
+
+# Bugs and Fixes
