@@ -1,13 +1,10 @@
-# Git Repo for Luca Knierim's UL ISE Project Submission
-Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py
-#
-#
-#
 # Basketball Shooting Form Analyser 
 (written in python)
 
+## Git Repo for Luca Knierim's UL ISE Project Submission
+Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py
 
- # NECESSARY INSTALLATIONS
+ ## NECESSARY INSTALLATIONS
 
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
   - Nvidia Studio drivers for your specific GPU  ----> https://www.nvidia.com/download/index.aspx
@@ -17,7 +14,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 
 
-# What the project does:
+### What the project does:
 
 - Uses an Ultralytics object detection model (YOLOv8) to annotate the output image of a webcam
 - Detected Objects: People, Basketballs
