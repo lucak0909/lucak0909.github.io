@@ -6,7 +6,7 @@ import time
 from PoseModule import PoseDetector
 import math
 import csv
-from pynput import keyboard
+import keyboard
 import pandas as pd
 import pyautogui
 
@@ -16,49 +16,39 @@ def clear_console():
 
 
 def key_display():
-    clear_console()
-    position = 0
-    print("\n\t\tShot Registered"
-          "\n\t\t---------------\n\n"
-          "\t\tTo cycle through your data use the arrow keys.\n"
-          "\t\tWhen ready to return to shot analysis press down arrow.\n")
-    csvHeaders = ["knee", "hip", "shoulder", "elbow"]
-    df = pd.read_csv("personal.csv", usecols=csvHeaders)
-    optimal_angles = [108.5, 122.3, 85.6, 71.9]
+    def wait_for_arrow_key():
+        nonlocal position
+        pressed_key = None
+        while pressed_key not in ["down", "left", "right"]:
+            event = keyboard.read_event()
+            if event.event_type == keyboard.KEY_DOWN:
+                if event.name in ["down", "left", "right"]:
+                    pressed_key = event.name
+                elif event.name not in ["down", "left", "right"]:
+                    clear_console()
+                    print("\n\t\tAn unexpected key was pressed"
+                          "\n\t\t-----------------------------"
+                          "\n\n\t\tUse the right and left arrow keys to cycle through your data."
+                          "\n\t\tUse the down arrow key to return to shot analysis.")
 
-    time.sleep(5)
-    clear_console()
-    print(
-        f"\n\t\tYour {csvHeaders[0]} angle is {sum(df.knee) / len(df.knee)} | The optimal angle is "
-        f"{optimal_angles[0]}")
-    if (sum(df.knee) / len(df.knee)) > optimal_angles[0]:
-        print(f"\n\t\tYou should reduce your {csvHeaders[0]} angle by "
-              f"{int((sum(df.knee) / len(df.knee)) - optimal_angles[0])} degrees")
-    elif (sum(df.knee) / len(df.knee)) < optimal_angles[0]:
-        print(f"\n\t\tYou should increase your {csvHeaders[0]} angle by "
-              f"{int(optimal_angles[0] - (sum(df.knee) / len(df.knee)))} degrees")
+        on_press(pressed_key)
+        return
 
     def on_press(key):
-        nonlocal position
-        try:
-            if key == keyboard.Key.right:
-                clear_console()
-                position += 1
-            elif key == keyboard.Key.left:
-                clear_console()
-                position -= 1
-            elif key == keyboard.Key.down:
-                clear_console()
-                time.sleep(3)
-                return False
-
-            position = max(0, min(3, position))  # Ensure position stays within bounds
-
+        nonlocal position  # Nonlocal is used to access the "position" variable in "key_display()" (parent function)
+        if key == "right":
             clear_console()
-            print_data(position)
+            position += 1
+        elif key == "left":
+            clear_console()
+            position -= 1
+        elif key == "down":
+            clear_console()
+            return
 
-        except AttributeError:
-            print("Invalid key was pressed")
+        position = max(0, min(3, position))  # This is to ensure "position" stays within 0-3 to avoid crashes
+        clear_console()
+        print_data(position)
 
     def print_data(position):
         clear_console()
@@ -102,12 +92,21 @@ def key_display():
             elif (sum(df.elbow) / len(df.elbow)) < optimal_angles[position]:
                 print(f"\n\t\tYou should increase your {csvHeaders[position]} angle by "
                       f"{int(optimal_angles[position] - (sum(df.elbow) / len(df.elbow)))} degrees")
-        with keyboard.Listener(on_press=on_press) as listener2:
-            listener2.join()
-        return False
+        wait_for_arrow_key()
 
-    with keyboard.Listener(on_press=on_press) as listener:
-        listener.join()
+    clear_console()
+    position = 0
+    print("\n\t\tShot Registered"
+          "\n\t\t---------------\n\n"
+          "\t\tTo cycle through your data use the arrow keys.\n"
+          "\t\tWhen ready to return to shot analysis press down arrow.\n")
+    csvHeaders = ["knee", "hip", "shoulder", "elbow"]
+    df = pd.read_csv("personal.csv", usecols=csvHeaders)
+    optimal_angles = [108.5, 122.3, 85.6, 71.9]
+
+    time.sleep(5)
+    clear_console()
+    print_data(0)
 
 
 # Setting up Servos
@@ -123,14 +122,14 @@ servo_y.write(90)  # (90 degrees)
 
 # Initializing variables:
 ballModel = YOLO("../ISE_Project/Weights/ballV8s.pt")  # AI model to detect the basketball
-bodyModel = YOLO("../ISE_Project/Weights/v8m_body_highest.pt")  # AI model to detect the person
+bodyModel = YOLO("../ISE_Project/Weights/personV8m.pt")  # AI model to detect the person
 names = ["Person"]  # class contained in the model
 webcam = cv.VideoCapture(0)  # initializes the source for the webcam
 frame = webcam.read()  # reads the first frame of the webcam
 current_x = 90  # initial x-axis servo position
 current_y = 90  # initial y-axis servo position
 elapsedTime = 0  # runtime of programme used to calculate fps
-total_frames = 0  # total number of frames processed
+totalFrames = 0  # total number of frames processed
 radius = 0  # pixel radius of the ball detected
 ballCentre = (0, 0)  # coordinates of the center of the ball
 elbow = 0  # internal angle of the elbow
@@ -158,8 +157,8 @@ webcam.set(3, 640)  # width value
 webcam.set(4, 640)  # height value
 webcam.set(10, 100)  # brightness value
 webcam.set(cv.CAP_PROP_FPS, 30)  # max frame-rate
-webcam_width = webcam.get(3)  # variable for width
-webcam_height = webcam.get(4)  # variable for height
+webcamWidth = webcam.get(3)  # variable for width
+webcamHeight = webcam.get(4)  # variable for height
 
 # Creating a csv file to store minimum value gathered into each list containing all angles recorded from each shot
 anglesHeader = ["knee", "hip", "shoulder", "elbow"]
@@ -200,7 +199,7 @@ while True:
     outputs2 = ballModel(frame, stream=True)
 
     # frame counter for servos
-    total_frames += 1
+    totalFrames += 1
 
     # checks yolo model for bounding box
     for i in outputs1:
@@ -236,7 +235,7 @@ while True:
                 bodyCentre = (int((x1 + x2) / 2), int((y1 + y2) / 2))
 
                 # to find distance from the center to give servos data
-                res = webcam_width, webcam_height
+                res = webcamWidth, webcamHeight
                 centre_distance = (res[0] / 2) - bodyCentre[0], (res[1] / 2) - bodyCentre[1]
 
                 # centre crosshair
@@ -246,7 +245,7 @@ while True:
                         pt2=(int((x1 + x2) / 2), int((y1 + y2) / 2) + 5), color=(0, 255, 0), thickness=1)
 
                 # servo instructions:
-                if total_frames % 2 == 0:  # only gives servo instructions every 2 frames
+                if totalFrames % 2 == 0:  # only gives servo instructions every 2 frames
                     if centre_distance[0] > 50:  # left
                         current_x += 1
                         if centre_distance[0] > 150:  # increases angle change based on position on camera
@@ -399,7 +398,6 @@ while True:
         data.writerow([min(knee_list), min(hip_list), min(shoulder_list), min(elbow_list)])
         file.close()
         key_display()
-
     # FPS counter to be displayed in the top left corner of the image
     currentTime = time.time()
     fps = 1 / (currentTime - elapsedTime)
@@ -411,5 +409,5 @@ while True:
         break
 
     # Displays the frame after the post-processing and inference has been completed and the image has been annotated
-    cv.imshow("With Bounding Boxes", frame)
+    cv.imshow("AI Basketball Shooting Form Analysis", frame)
     cv.waitKey(1)
