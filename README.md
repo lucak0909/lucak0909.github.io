@@ -2,6 +2,7 @@
 Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py"
 
 
+
  # NECESSARY INSTALLATIONS
 
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
