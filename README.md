@@ -21,7 +21,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
 
 # Bugs and Fixes
-| Syntax      | Description | Test Text     |
+| Bug      | Description | Fix    |
 | :---        |    :----:   |          ---: |
 | Header      | Title       | Here's this   |
 | Paragraph   | Text        | And more      |
