@@ -1,7 +1,6 @@
 # Basketball Shooting Form Analyser 
+Luca Knierim's UL ISE Project Submission
 <br>
-
-## Git Repo for Luca Knierim's UL ISE Project Submission
 Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py
 
  ## NECESSARY INSTALLATIONS
