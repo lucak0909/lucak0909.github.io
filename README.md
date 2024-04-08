@@ -17,6 +17,8 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 - Uses an Ultralytics object detection model (YOLOv8) to annotate the output image of a webcam
 - Detected Objects: People, Basketballs
+- The coordinates for the center of the "bounding-box" is compares with the resolution of the image to calculate the user's position in the frame.
+- Using PyFirmata the programme continuously moves an x and y axis servo, which the webcam is mounted on, until the user's position is the center of the frame.
 - Uses an edited version of CVZone's PoseModule.py, which utilizes mediapipe to complete pose-estimation on the output image, finding the angles between the each bodypart of the user.
 - Each angle is stored in a seperate list when the programme detects a basketball shot is taking place, based on predefined conditions.
 - The minimum angle in each list is added to their own respective collumn of a CSV.
