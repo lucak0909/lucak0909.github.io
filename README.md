@@ -1,8 +1,7 @@
 # Basketball Shooting Form Analyser 
 Luca Knierim's UL ISE Project Submission
-<br>
 Only download "README.txt", "requirements.txt", "PoseModule.py", "ShootingFormAnalyser.py
-<br>
+
  ## NECESSARY INSTALLATIONS
 
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
