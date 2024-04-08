@@ -1,6 +1,6 @@
 # Basketball Shooting Form Analyser 
 Luca Knierim's UL ISE Project Submission\
-Only download lucak0909.github.io/CODE folder
+Only download lucak0909.github.io/Code folder
 
  ## NECESSARY INSTALLATIONS
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
