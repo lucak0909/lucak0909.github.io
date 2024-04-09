@@ -39,20 +39,20 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 ### Version 1: Testing Servo Movement
 <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
     
-### Version 2:
+### Version 2: Basic AI Human Detection 
 <img src='/docs/videos/detectionV1.gif' title='AI Webcam Detection Person only' width='50%'/>
     
-### Version 3:
-<img src='/docs/videos/detectionV2.gif' title='Servos with laser XY demo' width='50%'/>
+### Version 3: Shaky Servo Tracking
+<img src='/docs/videos/detectionV2.gif' title='Shaky Servo Tracking' width='50%'/>
     
-### Version 4:
-<img src='/docs/videos/V3.gif' title='Servos with laser XY demo' width='50%'/>
+### Version 4: Smooth Servo Tracking
+<img src='/docs/videos/V3.gif' title='Fixed Servo Tracking' width='50%'/>
     
-### Version 5:
-<img src='/docs/videos/V4.gif' title='Servos with laser XY demo' width='50%'/>
+### Version 5: Human and Ball detection
+<img src='/docs/videos/V4.gif' title='Human and Ball Detection' width='50%'/>
     
-### Version 6:
-<img src='/docs/videos/V5.gif' title='Servos with laser XY demo' width='50%'/>
+### Version 6: Pose Estimation and Calculated Angles
+<img src='/docs/videos/V5.gif' title='Pose Estimation' width='50%'/>
     
 </div>
 
