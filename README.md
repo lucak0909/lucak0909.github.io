@@ -22,7 +22,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 # Bugs and Fixes
 | Date | Bug      | Description | Reason | Fix    |
-| :--- | :---     |    :----:   |   ---: |   ---; |
+| :--- | :---     |    :----:   |   ---: |   ---: |
 |01/01/24| x-axis servo overcompensating | Due to added delay within loop variable which changes servo position grows too fast | Removing bloat code to reduce delay |
 |03/01/24| Webcam Crashing | COM3 port disconnecting when webcam is running for too long due too insufficient power supply | Replaced Faulty Wire |
 |16/01/24| Servo angle is set to 0 on run | When  | Replaced Faulty Wire |
