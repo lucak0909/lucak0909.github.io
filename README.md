@@ -35,5 +35,5 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 # Evolution of the Project:
 
 <div align='center'>
-    <img src='./demo/demo.gif' title='Demo da calculadora' width='340px' />
+    <img src='docs.mp4' title='Servos with laser XY demo' width='fitcontent' />
 </div>
