@@ -44,19 +44,22 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 ### Version 2: Basic AI Human Detection 
 <img src='/docs/videos/detectionV1.gif' title='AI Webcam Detection Person only' width='50%'/>
     
-### Version 3: Shaky Servo Tracking
-<img src='/docs/videos/detectionV2.gif' title='Shaky Servo Tracking' width='50%'/>
+### Version 3: Improved Annotation
+<img src='/docs/videos/detectionV2.gif' title='Improved OpenCV Annotation' width='50%'/>
     
-### Version 4: Smooth Servo Tracking
-<img src='/docs/videos/V3.gif' title='Fixed Servo Tracking' width='50%'/>
+### Version 4: Shaky Servo Tracking
+<img src='/docs/videos/V3.gif' title='Shaky Servo Tracking' width='50%'/>
     
-### Version 5: Human and Ball detection
+### Version 5: Smooth Servo Tracking
+<img src='/docs/videos/V4.gif' title='Fixed Servo Tracking' width='50%'/>
+    
+### Version 6: Human and Ball detection
 <img src='/docs/videos/V3.gif' title='Human and Ball Detection' width='50%'/>
     
-### Version 6: Pose Estimation and Calculated Angles
+### Version 7: Pose Estimation and Calculated Angles
 <img src='/docs/videos/V5.gif' title='Pose Estimation' width='50%'/>
 
-### Version 7: Unreliable Shot detection
+### Version 8: Unreliable Shot detection
 [![Unreliable Shot Detection](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
     
 </div>
