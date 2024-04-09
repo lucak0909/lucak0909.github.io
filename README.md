@@ -33,3 +33,8 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 
 # Evolution of the Project:
+
+<div align='center'>
+    <h1>Calculadora Tk</h1>
+    <img src='./demo/demo.gif' title='Demo da calculadora' width='340px' />
+</div>
