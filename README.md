@@ -35,7 +35,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 # Evolution of the Project:
 
 <div align='center'>
-    <h2 display='block' padding='10px'>Version 1: <u>Testing Servo Movement</u><\h2>
+    ### Testing Servo Movement
     <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
     <h2><\h2>
     <img src='/docs/videos/detectionV1.gif' title='AI Webcam Detection Person only' width='50%'/>
