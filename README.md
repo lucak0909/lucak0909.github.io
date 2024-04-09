@@ -31,11 +31,10 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 # Final Product:
 
+# Evolution of the Project
 <div align='center'>
 <img 
 <\div>
-
-# Evolution of the Project:
 
 <div align='center'>
 
