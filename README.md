@@ -9,7 +9,7 @@ Only download lucak0909.github.io/Code folder
 
 These downloads will allow your GPU to process the images instead of your CPU greatly increasing frames per second
 
-# What the project does:
+## What the project does:
 - Uses an Ultralytics object detection model (YOLOv8) to annotate the output image of a webcam
 - Detected Objects: People, Basketballs
 - The coordinates for the center of the "bounding-box" is compares with the resolution of the image to calculate the user's position in the frame.
@@ -20,7 +20,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - Once the shot is complete (The basketball leaves the users hand while the angles are being recorded), a function displays each angle, and compares them with the optimal angles for a free throw shot.
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
 
-# Bugs and Fixes
+## Bugs and Fixes
 | Date | Bug      | Description | Reason | Fix    |
 | :--- | :---     |    :----:   |   ---: |   ---: |
 |01/01/24| x-axis servo overcompensating | Servo Overshoots center of bounding box then compensates by overshooting the opposite direction, resuting in a shake left and right | Added delay within loop --> variable which changes servo position grows too fast | Removing bloat code |
@@ -29,13 +29,13 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 |08/04/24| pynput function lag | On first iteration of key_display(), user can exit the function but after each iteration there is a large buffer and the user cannot exit | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
 
 
-# Final Product
+## Final Product
 <div align='center'>
 [![Basketball Shooting Form Analyser](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
 </div>
 
 
-# Evolution of the Project
+## Evolution of the Project
 <div align='center'>
 
 ### Version 1: Testing Servo Movement
