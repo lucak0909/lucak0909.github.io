@@ -36,7 +36,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 <div align='center'>
     <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
-    <img src='/docs/videos/V1.gif' title='AI Webcam Detection Person only' width='50%'/>
+    <img src='/docs/videos/detectionV1.gif' title='AI Webcam Detection Person only' width='50%'/>
     <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
     <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
     <img src='/docs/videos/LaserXY.gif' title='Servos with laser XY demo' width='50%'/>
