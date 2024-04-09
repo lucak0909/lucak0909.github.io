@@ -54,10 +54,10 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 <img src='/docs/videos/V4.gif' title='Fixed Servo Tracking' width='50%'/>
     
 ### Version 6: Human and Ball detection
-<img src='/docs/videos/V6.gif' title='Human and Ball Detection' width='50%'/>
+<img src='/docs/videos/V5.gif' title='Human and Ball Detection' width='50%'/>
     
 ### Version 7: Pose Estimation and Calculated Angles
-<img src='/docs/videos/V5.gif' title='Pose Estimation' width='50%'/>
+<img src='/docs/videos/V6.gif' title='Pose Estimation' width='50%'/>
 
 ### Version 8: Unreliable Shot detection
 [![Unreliable Shot Detection](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
