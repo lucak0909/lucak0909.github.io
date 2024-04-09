@@ -35,5 +35,5 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 # Evolution of the Project:
 
 <div align='center'>
-    <img src='/docs/videos/LaserXY.mp4' title='Servos with laser XY demo' width='340'/>
+    <img src='/docs/videos/LaserXY (1).gif' title='Servos with laser XY demo' width='340'/>
 </div>
