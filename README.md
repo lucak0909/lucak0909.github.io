@@ -21,10 +21,12 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
 
 # Bugs and Fixes
-| Date | Bug      | Description | Fix    |
-| :--- | :---        |    :----:   |          ---: |
-|| Header      | Title       | Here's this   |
-|08/4| pynput function lag | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
+| Date | Bug      | Description | Reason | Fix    |
+| :--- | :---     |    :----:   |   ---: |   ---; |
+|01/01/24| x-axis servo overcompensating | Due to added delay within loop variable which changes servo position grows too fast | Removing bloat code to reduce delay |
+|03/01/24| Webcam Crashing | COM3 port disconnecting when webcam is running for too long due too insufficient power supply | Replaced Faulty Wire |
+|16/01/24| Servo angle is set to 0 on run | When  | Replaced Faulty Wire |
+|08/04/24| pynput function lag | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
 
 
 # Final Product:
