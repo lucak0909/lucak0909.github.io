@@ -31,6 +31,9 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 # Final Product:
 
+<div align='center'>
+<img 
+<\div>
 
 # Evolution of the Project:
 
@@ -53,6 +56,9 @@ These downloads will allow your GPU to process the images instead of your CPU gr
     
 ### Version 6: Pose Estimation and Calculated Angles
 <img src='/docs/videos/V5.gif' title='Pose Estimation' width='50%'/>
+
+### Version 7: Unreliable Shot detection
+[![Video Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](https://drive.google.com/file/d/1JyRU_A-9JmHfX-HCOdfoi-2Df5mu0N5G/view?usp=drive_link)
     
 </div>
 
