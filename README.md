@@ -29,7 +29,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 |08/04/24| pynput function lag | On first iteration of key_display(), user can exit the function but after each iteration there is a large buffer and the user cannot exit | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
 
 
-
+# Final Product
 <div align='center'>
 [![Unreliable Shot Detection](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
 </div>
