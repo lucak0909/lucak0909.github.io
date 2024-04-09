@@ -58,7 +58,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 <img src='/docs/videos/V5.gif' title='Pose Estimation' width='50%'/>
 
 ### Version 7: Unreliable Shot detection
-[![Video Demo](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](https://drive.google.com/file/d/1JyRU_A-9JmHfX-HCOdfoi-2Df5mu0N5G/view?usp=drive_link)
+[![Unreliable Shot Detection](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
     
 </div>
 
