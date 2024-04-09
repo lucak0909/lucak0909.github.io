@@ -23,10 +23,10 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 # Bugs and Fixes
 | Date | Bug      | Description | Reason | Fix    |
 | :--- | :---     |    :----:   |   ---: |   ---: |
-|01/01/24| x-axis servo overcompensating | Due to added delay within loop variable which changes servo position grows too fast | Removing bloat code to reduce delay |
-|03/01/24| Webcam Crashing | COM3 port disconnecting when webcam is running for too long due too insufficient power supply | Replaced Faulty Wire |
-|16/01/24| Servo angle is set to 0 on run | When  | Replaced Faulty Wire |
-|08/04/24| pynput function lag | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
+|01/01/24| x-axis servo overcompensating | Due to added delay within loop variable which changes servo position grows too fast | | Removing bloat code |
+|03/01/24| Webcam Crashing | COM3 port disconnecting when webcam is running for too long due too insufficient power supply | Faulty Wire | Replaced Faulty Wire |
+|16/01/24| Servo angle is set to 0 on run | When the program is run, both servo angles set themselves to 0 without writing any angle | Unknown (order of operations?) | Placed function which sets starting servo angle at beginning |
+|08/04/24| pynput function lag | On first iteration of key_display(), user can exit the function but after each iteration there is a large buffer and the user cannot exit | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
 
 
 # Final Product:
