@@ -52,7 +52,7 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 
 
-## Final Product
+# Final Product
 <div align='center'>
 [[Basketball Shooting Form Analyser](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
 </div>
