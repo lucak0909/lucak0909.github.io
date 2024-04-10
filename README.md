@@ -1,7 +1,8 @@
 <div align='center'>
 <h1>Basketball Shooting Form Analyser</h1>
 </div>
-### Luca Knierim's UL ISE Project Submission
+
+ ### Luca Knierim's UL ISE Project Submission
  - Only download [Code folder](https://github.com/lucak0909/lucak0909.github.io/tree/main/Code)
 
  ## NECESSARY INSTALLATIONS
