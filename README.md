@@ -25,8 +25,14 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 | :--- | :---     |    :----:   |   ---: |   ---: |
 |01/01/24| x-axis servo overcompensating | Servo Overshoots center of bounding box then compensates by overshooting the opposite direction, resuting in a shake left and right | Added delay within loop --> variable which changes servo position grows too fast | Removing bloat code |
 |03/01/24| Webcam Crashing | COM3 port disconnecting when webcam is running for too long due too insufficient power supply | Faulty Wire | Replaced Faulty Wire |
+|06/04/24| AI cant detect when servo moves | AI struggles to find Person when webcam is moving | Servo is moving too fast, and blurs image | Only change angle every second frame |
 |16/01/24| Servo angle is set to 0 on run | When the program is run, both servo angles set themselves to 0 without writing any angle | Unknown (order of operations?) | Placed function which sets starting servo angle at beginning |
+|14/02/24| Servo getting stuck | Roughly every 10 seconds servos stop moving | Overrotation grinds down gears and removes grip | New servos and add a min/max angle to servos |
+|17/03/24| Negative angles | pose estimation's angle calculation goes to negative numbers | no modulus | find modulus of printed angle |
+|05/04/24| basketball model cant find ball | Yolo model which detects basketballs is extremely unreliable and wont allow shot detection | Model is looking for basketball after all other annotations | Change order of operations |
 |08/04/24| pynput function lag | On first iteration of key_display(), user can exit the function but after each iteration there is a large buffer and the user cannot exit | Recursive function creates too much lag when containing pynput as too many threads are being used at once. | Using "keyboard" library instead |
+|10/04/24| Unreliable Shot detection | Have to overpronounce movements for programme to recognize a shot | Incorrect angle thresholds | Lower angle thresholds |
+
 
 
 ## Final Product
