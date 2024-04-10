@@ -65,7 +65,9 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 </div>
 
 ## Sources:
+- Ultralytics Machine Learning: https://docs.ultralytics.com/
 - PoseModule.py: Edited version of [CVzone's "PoseModule.py"](https://github.com/cvzone/cvzone/blob/master/cvzone/PoseModule.py)
+- PyFirmata Documentation: https://pyfirmata.readthedocs.io/en/latest/
 - Optimal Shooting Angles: https://www.researchgate.net/publication/357307984_Key_Kinematic_Components_for_Optimal_Basketball_Free_Throw_Shooting_Performance
 - Finding Pose Estimation Angles: https://www.youtube.com/watch?v=5kaX3ta398w
 - Drawing Angle Arcs: https://answers.opencv.org/question/173257/drawing-an-arc/
