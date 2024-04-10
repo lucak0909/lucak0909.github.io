@@ -65,5 +65,5 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 </div>
 
 ## Sources:
-- PoseModule.py: Edited version of CVzone's "PoseModule.py"
+- PoseModule.py: Edited version of [CVzone's "PoseModule.py"](https://github.com/cvzone/cvzone/blob/master/cvzone/PoseModule.py)
 - Optimal Shooting Angles: https://www.researchgate.net/publication/357307984_Key_Kinematic_Components_for_Optimal_Basketball_Free_Throw_Shooting_Performance
