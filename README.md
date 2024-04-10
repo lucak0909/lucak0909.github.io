@@ -23,12 +23,6 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 - The function contains multiple nested functions which allow for cycling through each angle with the arrow-keys and finally when the user is finished they may press the down arrow to return to the main loop.
 
 
-## Final Product
-<div align='center'>
-[[Basketball Shooting Form Analyser](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
-</div>
-
-
 ## Evolution of the Project
 <div align='center'>
 
@@ -55,7 +49,15 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 
 ### Version 8: Unreliable Shot detection (Click Image)
 [![Unreliable Shot Detection](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
-    
+
+
+
+## Final Product
+<div align='center'>
+[[Basketball Shooting Form Analyser](https://img.youtube.com/vi/Ip50om6sWt4/0.jpg)](https://www.youtube.com/watch?v=Ip50om6sWt4)
+</div>
+
+
 </div>
 
 
