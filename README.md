@@ -1,8 +1,8 @@
 <div align='center'>
 <h1>Basketball Shooting Form Analyser</h1>
-<h3>Luca Knierim's UL ISE Project Submission</h3>
-<p>Only download lucak0909.github.io/Code folder</p>
 </div>
+### Luca Knierim's UL ISE Project Submission
+ - Only download [Code folder](https://github.com/lucak0909/lucak0909.github.io/tree/main/Code)
 
  ## NECESSARY INSTALLATIONS
   - Visual Studio with support for C++ development  ----> https://visualstudio.microsoft.com/downloads/
