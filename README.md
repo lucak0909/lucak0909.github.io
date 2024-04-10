@@ -55,6 +55,8 @@ These downloads will allow your GPU to process the images instead of your CPU gr
 ### Final Product (Click Image)
 [![Unreliable Shot Detection](https://img.youtube.com/vi/AMlpqofiGKs/0.jpg)](https://www.youtube.com/watch?v=AMlpqofiGKs)
 
+</div>
+
 
 ## Bugs and Fixes
 | Date | Bug      | Description | Reason | Fix    |
